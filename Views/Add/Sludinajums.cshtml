@@ -1,0 +1,32 @@
+﻿@model Sludinajumi.Logic.Item
+@{
+    ViewData["Title"] = "Sludinajums";
+}
+
+    <ol class="breadcrumb">
+        <li><a asp-controller="Category" asp-action="Index">Sludinājumi</a></li>
+        <li><a asp-controller="Add" asp-action="Index" asp-route-id="@Model.Category.Id">@Model.Category.Title</a></li>
+        <li class="active">@Model.Title</li>
+        </ol>
+
+<h2>@Model.Title</h2>
+
+
+<div class="container">
+    <div class="col-md-4">
+        <center> <img src="@Model.Photo" /></center>
+        <p>  <center> <img src="@Model.Photo" />  <img src="@Model.Photo" />  <img src="@Model.Photo" /></center></p>
+    </div>
+    <div class="col-md-8">
+        <p>Price: <span>$@Model.Price</span></p>
+        <p>Atrašanās vieta: <span>@Model.Location</span></p>
+        <p>Pievienošanas laiks: <span>@Model.DateTime.ToShortDateString()</span></p>
+        @if (Context.Session.GetUserEmail() != null)
+        {
+    <p>Tālrunis: <span>@Model.Phone</span></p>
+    <p>Epasts: <span>@Model.Email</span></p>
+        }
+        <p>Apraksts: <span>@Model.Description</span></p>
+
+    </div>
+</div>

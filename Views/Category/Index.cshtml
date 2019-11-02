@@ -1,0 +1,35 @@
+﻿@model CatalogModel
+@{
+    ViewData["Title"] = "Sludinājumu portāls";
+}
+
+    <div class="container">
+        @if (Context.Session.GetUserEmail() != null)
+        {
+            <p class="text-right">
+                    <a asp-controller="Category" asp-action="JaunsSludinajums" class="btn">Pievienot sludinājumu</a>
+            </p>
+        }
+    <div class="row">
+        @foreach (var category in Model.categories.Where(u => !u.CategoryId.HasValue))
+        {
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        @category.Title
+                    </a>
+                    @foreach (var subcategory in Model.categories.Where(u => u.CategoryId == category.Id))
+                    {
+                        <a class="list-group-item"
+                           asp-controller="Add"
+                           asp-action="Index"
+                           asp-route-id="@subcategory.Id">
+                            @subcategory.Title
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+        
+        </div>
+    </div>
